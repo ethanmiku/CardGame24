@@ -25,7 +25,7 @@ public class HelloController {
     private ImageView card4Image;
 
     @FXML
-    private void handleRefresh(){
+    private void handleRefresh() {
         generateCards();
         expressionField.clear();
     }
@@ -72,7 +72,7 @@ public class HelloController {
     }
 
     @FXML
-    private void handleFindSolution(){
+    private void handleFindSolution() {
 
         //create a solution finder
         SolutionFinder finder = new SolutionFinder();
@@ -80,15 +80,15 @@ public class HelloController {
         //find a solution using the current four cards
         String solution = finder.findSolution(cardValues);
 
-        if(solution != null){
+        if (solution != null) {
 
             //display the solution in the text field
             expressionField.setText(solution);
 
-            showAlert("Solution Found", "A possible solution is:" + solution);
-        } else{
+            showAlert("Solution Found", "A possible solution is: " + solution);
+        } else {
             //tell the player if no solution is found
-            showAlert("No Solution", " No solution exists for these cards. Try Refresh.");
+            showAlert("No Solution", "No solution exists for these cards. Try Refresh.");
         }
     }
 
@@ -120,19 +120,19 @@ public class HelloController {
         }
     }
 
-    private void generateCards(){
+    private void generateCards() {
         Collections.shuffle(deck);
         cardValues.clear();
 
-        ImageView[] imageViews = {card1Image,card2Image,card3Image,card4Image};
+        ImageView[] imageViews = {card1Image, card2Image, card3Image, card4Image};
 
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             String filename = deck.get(i);
             String rank = filename.split("_of_")[0];
 
             int value;
 
-            switch(rank){
+            switch (rank) {
                 case "ace" -> value = 1;
                 case "jack" -> value = 11;
                 case "queen" -> value = 12;
@@ -150,21 +150,25 @@ public class HelloController {
         }
     }
 
-    private boolean validateNumbers(String expression){
+    private boolean validateNumbers(String expression) {
         ArrayList<Integer> numbers = new ArrayList<>();
 
         String[] tokens = expression.split("[^0-9]+");
 
-        for(String token : tokens){
-            if(!token.isEmpty()){
-                numbers.add(Integer.parseInt(token));
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                try {
+                    numbers.add(Integer.parseInt(token));
+                } catch (NumberFormatException e) {
+                    return false;
+                }
             }
         }
-        ArrayList<Integer> expected = new ArrayList<>(cardValues);
+            ArrayList<Integer> expected = new ArrayList<>(cardValues);
 
-        Collections.sort(numbers);
-        Collections.sort(expected);
+            Collections.sort(numbers);
+            Collections.sort(expected);
 
-        return numbers.equals(expected);
-    }
+            return numbers.equals(expected);
+        }
 }
