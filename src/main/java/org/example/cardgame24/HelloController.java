@@ -3,10 +3,12 @@ package org.example.cardgame24;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class HelloController {
 
@@ -22,12 +24,52 @@ public class HelloController {
     @FXML
     private ImageView card4Image;
 
-    @FXML
-    private void handleRefresh(){ generateCards();}
 
     @FXML
-    private void handleVerify(){
+    private void handleRefresh(){
+        generateCards();
+        expressionField.clear();
+    }
 
+
+    @FXML
+    private TextField expressionField;
+
+    @FXML
+    private void handleVerify() {
+        String expression = expressionField.getText();
+
+        //check if all four card values are used
+        if (!validateNumbers(expression)) {
+            showAlert("Invalid Expression",
+                    "You must use all four card values exactly once.");
+            return;
+        }
+
+        try {
+            //calculate the expression
+            ExpressionEvaluator evaluator = new ExpressionEvaluator();
+            double result = evaluator.evaluate(expression);
+
+            //check if the result equals 24
+            if (Math.abs(result - 24) < 1e-9) {
+                showAlert("Correct!", "Your expression equals 24!");
+            } else {
+                showAlert("Incorrect",
+                        "Your expression equals " + result + ", not 24.");
+            }
+
+        } catch (IllegalArgumentException e) {
+            showAlert("Invalid Expression", e.getMessage());
+        }
+    }
+    //display a message to the player
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -91,5 +133,23 @@ public class HelloController {
 
             imageViews[i].setImage(image);
         }
+    }
+
+    private boolean validateNumbers(String expression){
+        ArrayList<Integer> numbers = new ArrayList<>();
+
+        String[] tokens = expression.split("[^0-9]+");
+
+        for(String token : tokens){
+            if(!token.isEmpty()){
+                numbers.add(Integer.parseInt(token));
+            }
+        }
+        ArrayList<Integer> expected = new ArrayList<>(cardValues);
+
+        Collections.sort(numbers);
+        Collections.sort(expected);
+
+        return numbers.equals(expected);
     }
 }
