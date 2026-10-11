@@ -1,0 +1,70 @@
+
+/* main application background */
+.root {
+    -fx-background-color: #152238;
+    -fx-font-family: "Segoe UI";
+}
+
+/* all labels */
+.label {
+    -fx-text-fill: white;
+}
+
+/* button styling */
+.button {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+}
+
+/* button hover effect */
+.button:hover {
+    -fx-background-color: #3b82f6;
+}
+
+/* button pressed effect */
+.button:pressed {
+    -fx-background-color: #1d4ed8;
+}
+
+/* expression input field */
+.text-field {
+    -fx-background-color: white;
+    -fx-text-fill: #1e293b;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+/* highlight the input when selected */
+.text-field:focused {
+    -fx-border-color: #3b82f6;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+}
+
+/* white background for playing cards */
+.card-container {
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 5;
+}
+
+/* game title */
+.game-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* subtitle below the title */
+.game-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #a9bcd2;
+}

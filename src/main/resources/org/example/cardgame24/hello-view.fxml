@@ -2,22 +2,46 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="org.example.cardgame24.HelloController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cardgame24.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+         <children>
+            <Label styleClass="game-title" text="Card game 24" />
+            <Label styleClass="game-subtitle" text="Use all four cards to make 24" />
+         </children>
+      </VBox>
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="500.0" spacing="10.0">
          <children>
-            <ImageView fx:id="card1Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="card2Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="card3Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="card4Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+            <StackPane minHeight="110.0" minWidth="80.0" prefHeight="110.0" prefWidth="80.0" styleClass="card-container">
+               <children>
+                  <ImageView fx:id="card1Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane minHeight="110.0" minWidth="80.0" prefHeight="110.0" prefWidth="80.0" styleClass="card-container">
+               <children>
+                  <ImageView fx:id="card2Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane minHeight="110.0" minWidth="80.0" prefHeight="110.0" prefWidth="80.0" styleClass="card-container">
+               <children>
+                  <ImageView fx:id="card3Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane minHeight="110.0" minWidth="80.0" prefHeight="110.0" prefWidth="80.0" styleClass="card-container">
+               <children>
+                  <ImageView fx:id="card4Image" fitHeight="105.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="45.0" spacing="15.0">
