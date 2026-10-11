@@ -101,13 +101,16 @@ public class HelloController {
         generateCards();
     }
 
+    //create a standard deck of 52 playing cards
     private void createDeck() {
         String[] suits = {"clubs", "diamonds", "hearts", "spades"};
 
+        //loop through each suit and card value
         for (String suit : suits) {
             for (int value = 1; value <= 13; value++) {
                 String rank;
 
+                //convert special cards into their rank names
                 switch (value) {
                     case 1 -> rank = "ace";
                     case 11 -> rank = "jack";
@@ -115,12 +118,14 @@ public class HelloController {
                     case 13 -> rank = "king";
                     default -> rank = String.valueOf(value);
                 }
+                //add the card image filename to the deck
                 deck.add(rank + "_of_" + suit + ".png");
             }
         }
     }
 
     private void generateCards() {
+        //shuffle the deck and clear previous card values
         Collections.shuffle(deck);
         cardValues.clear();
 
@@ -130,6 +135,7 @@ public class HelloController {
             String filename = deck.get(i);
             String rank = filename.split("_of_")[0];
 
+            //convert the card rank into its numerical value
             int value;
 
             switch (rank) {
@@ -142,8 +148,8 @@ public class HelloController {
 
             cardValues.add(value);
 
+            //load and display the corresponding card images
             String path = "/org/example/cardgame24/Cards/" + filename;
-
             Image image = new Image(getClass().getResource(path).toExternalForm());
 
             imageViews[i].setImage(image);
