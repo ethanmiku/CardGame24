@@ -24,13 +24,11 @@ public class HelloController {
     @FXML
     private ImageView card4Image;
 
-
     @FXML
     private void handleRefresh(){
         generateCards();
         expressionField.clear();
     }
-
 
     @FXML
     private TextField expressionField;
@@ -63,6 +61,7 @@ public class HelloController {
             showAlert("Invalid Expression", e.getMessage());
         }
     }
+
     //display a message to the player
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -75,6 +74,22 @@ public class HelloController {
     @FXML
     private void handleFindSolution(){
 
+        //create a solution finder
+        SolutionFinder finder = new SolutionFinder();
+
+        //find a solution using the current four cards
+        String solution = finder.findSolution(cardValues);
+
+        if(solution != null){
+
+            //display the solution in the text field
+            expressionField.setText(solution);
+
+            showAlert("Solution Found", "A possible solution is:" + solution);
+        } else{
+            //tell the player if no solution is found
+            showAlert("No Solution", " No solution exists for these cards. Try Refresh.");
+        }
     }
 
     private final ArrayList<String> deck = new ArrayList<>();
